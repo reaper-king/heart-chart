@@ -1,11 +1,10 @@
-<script> 
-	import { onMount } from 'svelte';
-	import Heart from './heart_1.svelte'
-		
-	import { pumpHeart } from './heart.js';
-		
-		 onMount(()=> pumpHeart(1) )
-		
+<script>
+import Heart_1 from './heart.svelte';
+ 
+let hearts = [3,1,2,3,4,5]
+
 </script>
 
-	<Heart ></Heart>
+{#each hearts as heart , i }
+<Heart_1 count={heart} count_id={i}></Heart_1>
+{/each}
