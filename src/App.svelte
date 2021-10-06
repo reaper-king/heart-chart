@@ -1,7 +1,7 @@
 <script> 
 import { onMount } from 'svelte';
 	import gsap from 'gsap'
-import Heart from './heart.svelte'
+import Heart from './heart_1.svelte'
 	
 import { pumpHeart } from './heart.js';
 	
@@ -10,7 +10,3 @@ import { pumpHeart } from './heart.js';
 </script>
 
 <Heart></Heart>
-<Heart></Heart>
-<Heart></Heart>
-<Heart></Heart>
-<Heart></Heart>		
