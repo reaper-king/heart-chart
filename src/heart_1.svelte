@@ -1,12 +1,22 @@
 <script>
-	import gsap from 'gsap'
+	import { onMount } from 'svelte';
+	let gsap;
+	
+	onMount(async () => {
+		
+    const module = await import ('gsap');
+
+  	gsap = module.default;
+
+    console.log("loaded gsap onMount");
+	
+	})
 </script>
 
 
-
-
+<div class="container">
   <div class="heart-wrap">
-    <div class="heart"  >
+    <div class="heart">
       <div class="tank"></div>
       <svg class="curve" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
         <defs>
@@ -20,6 +30,7 @@
       </svg>
     </div>
   </div>
+</div>
 <svg>
   <clipPath id="myPath" clipPathUnits="objectBoundingBox">
 <!--     <path d="M0.498,1 s0.243,-0.102,0.394,-0.323 S1,0.14,0.864,0.033 S0.498,0.141,0.498,0.141 S0.291,-0.08,0.124,0.031 s-0.159,0.434,-0.021,0.646 S0.498,1,0.498,1" /> -->
@@ -30,71 +41,86 @@
 
 
 
-<style>
-
-/* 
-Wave svg credits - https://codepen.io/goodkatz/pen/LYPGxQz
-*/
-:root {
-  --dim-x: 10vw;
-  --dim-y: 12vh;
-  --cruve-height: 15px;
-}
 
 
-#myPath path {
-  transform: translate(0.125px, 0.033px);
-}
-
-.heart-wrap {
-  cursor: pointer;
-  perspective: 100px;
-  filter: drop-shadow(0px 10px 10px rgba(174, 196, 238, 0.5));
-}
-
-.heart {
-  position: relative;
-  height: var(--dim-y);
-  width: var(--dim-x);
-  overflow: hidden;
-  clip-path: url(#myPath);
-  background-image: radial-gradient(#c9d8f5 60%, #afc4ee);
-}
-
-.tank {
-  position: absolute;
-  bottom: 0;
-  height: 0;
-  width: var(--dim-x);
-  background-color: #6782bf;
-  z-index: 5;
-}
-
-.curve {
-  position: absolute;
-  bottom: calc(-1 * var(--cruve-height));
-  width: var(--dim-x);
-  height: var(--cruve-height);
-}
-.curve use {
-  animation: move 2s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
-}
-.curve use:nth-child(1) {
-  animation-duration: 3s;
-}
-.curve use:nth-child(2) {
-  animation-duration: 4s;
-}
-.curve use:nth-child(3) {
-  animation-duration: 2s;
-}
-
-@keyframes move {
-  0% {
-    transform: translateX(-90px);
+<style>/* 
+  Wave svg credits - https://codepen.io/goodkatz/pen/LYPGxQz
+  */
+  :root {
+    --dim-x: 80px;
+    --dim-y: 70px;
+    --cruve-height: 20px;
   }
-  100% {
-    transform: translateX(85px);
+  
+  * {
+    border: 0;
+    margin: 0;
+    box-sizing: border-box;
   }
-}
+  
+  .container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: white;
+  }
+  
+  #myPath path {
+    transform: translate(0.125px, 0.033px);
+  }
+  
+  .heart-wrap {
+    cursor: pointer;
+    perspective: 200px;
+    filter: drop-shadow(0px 10px 10px rgba(174, 196, 238, 0.5));
+  }
+  
+  .heart {
+    position: relative;
+    height: var(--dim-y);
+    width: var(--dim-x);
+    overflow: hidden;
+    clip-path: url(#myPath);
+    background-image: radial-gradient(#c9d8f5 60%, #afc4ee);
+  }
+  
+  .tank {
+    position: absolute;
+    bottom: 0;
+    height: 0;
+    width: var(--dim-x);
+    background-color: #6782bf;
+    z-index: 5;
+  }
+  
+  .curve {
+    position: absolute;
+    bottom: calc(-1 * var(--cruve-height));
+    width: var(--dim-x);
+    height: var(--cruve-height);
+  }
+  .curve use {
+    animation: move 2s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite;
+  }
+  .curve use:nth-child(1) {
+    animation-duration: 3s;
+  }
+  .curve use:nth-child(2) {
+    animation-duration: 4s;
+  }
+  .curve use:nth-child(3) {
+    animation-duration: 2s;
+  }
+  
+  @keyframes move {
+    0% {
+      transform: translateX(-90px);
+    }
+    100% {
+      transform: translateX(85px);
+    }
+  }
+
 </style>
