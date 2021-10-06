@@ -1,24 +1,75 @@
+
 <script>
 	import { onMount } from 'svelte';
 	let gsap;
-	
+	export let count = 0;
+	export let count_id = 0;
+	let pumpLevels = [0, 0, 3, 0, 0, 0 , 0];
+	let tankLevels = [0, 10, 3, 30, 40, 60, 60];
+	let isAnimating = false;
+
+export function pumpHeart(counter) {
+    if (isAnimating) {
+        return;
+    }
+
+    isAnimating = true;
+    //forward
+    gsap.to('#heart'+count_id, {
+        translateZ: pumpLevels[3],
+        duration: 0.5
+    });
+
+    gsap.to('#curve'+count_id, {
+        bottom: tankLevels[counter],
+        transformOrigin: "bottom",
+        scaleY: 1,
+        duration: 0.5
+    })
+    gsap.to('#tank'+count_id, {
+        height: counter === 3 ? 0 : tankLevels[counter],
+        duration: 0.5
+    })
+
+    //reverse
+    gsap.to('#curve'+count_id, {
+        delay: 0.6,
+        bottom: tankLevels[counter],
+        transformOrigin: "bottom",
+        scaleY: 0.5,
+        duration: 0.5
+    });
+
+    gsap.to('#heart'+count_id, {
+        delay: 0.6,
+        translateZ: 0,
+        duration: 0.25,
+        onComplete: function() {
+            isAnimating = false;
+        }
+    })
+}
+
+
 	onMount(async () => {
 		
     const module = await import ('gsap');
 
   	gsap = module.default;
 
-    console.log("loaded gsap onMount");
+    pumpHeart(count)
 	
 	})
-</script>
 
+
+</script>
 
 <div class="container">
   <div class="heart-wrap">
-    <div class="heart">
-      <div class="tank"></div>
-      <svg class="curve" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+				{count}
+    <div id="heart{count_id}" class="heart" >
+      <div id="tank{count_id}" class="tank"></div>
+      <svg  id="curve{count_id}"class="curve" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
         <defs>
           <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
         </defs>
@@ -47,9 +98,9 @@
   Wave svg credits - https://codepen.io/goodkatz/pen/LYPGxQz
   */
   :root {
-    --dim-x: 80px;
-    --dim-y: 70px;
-    --cruve-height: 20px;
+    --dim-x: 120px;
+    --dim-y: 105px;
+    --cruve-height: 10px;
   }
   
   * {
