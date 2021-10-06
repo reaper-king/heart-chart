@@ -1,8 +1,6 @@
 <script>
-
 	import gsap from 'gsap'
 </script>
-
 
 
 
@@ -38,8 +36,8 @@
 Wave svg credits - https://codepen.io/goodkatz/pen/LYPGxQz
 */
 :root {
-  --dim-x: 80px;
-  --dim-y: 70px;
+  --dim-x: 10vw;
+  --dim-y: 12vh;
   --cruve-height: 15px;
 }
 
@@ -99,5 +97,4 @@ Wave svg credits - https://codepen.io/goodkatz/pen/LYPGxQz
     transform: translateX(85px);
   }
 }
-
 </style>
