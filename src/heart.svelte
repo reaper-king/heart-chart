@@ -1,10 +1,12 @@
-
 <script>
+  import gsap from 'gsap';
+
 	import { onMount } from 'svelte';
-	let gsap;
 	export let count = 0;
-	export let count_id = 0;
-	let pumpLevels = [0, 0, 3, 0, 0, 0 , 0];
+export let count_id = 0;
+
+
+  let pumpLevels = [0, 0, 3, 0, 0, 0 , 0];
 	let tankLevels = [0, 10, 3, 30, 40, 60, 60];
 	let isAnimating = false;
 
@@ -51,18 +53,13 @@ export function pumpHeart(counter) {
 }
 
 
-	onMount(async () => {
-		
-    const module = await import ('gsap');
+onMount(async () => {
 
-  	gsap = module.default;
+pumpHeart(count)
 
-    pumpHeart(count)
-	
-	})
-
-
+})
 </script>
+
 
 <div class="container">
   <div class="heart-wrap">
