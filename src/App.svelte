@@ -97,7 +97,7 @@ ul {
         flex-flow: row wrap;
         gap:1em;
           align-items: flex-start;
-          justify-content:flex-start;
+          justify-content:space-evenly;
           padding: 30px;
 
 	}
