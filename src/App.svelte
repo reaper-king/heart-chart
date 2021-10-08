@@ -1,61 +1,3 @@
-<!-- <script>
-
-import { onMount } from  'svelte';
-import Heart_1 from './heart.svelte';
- 
-let hearts 
-
-
-
-async function fetchMoviesJSON() {
-                const response = await fetch('https://gs-api.vercel.app/bl');
-                const sheetData = await response.json();
-                return sheetData;
-            }
-
-            fetchMoviesJSON().then(sheetData => {
-
-              hearts = sheetData[0]
-            });
-
-
-</script>
-<ul>
-
-{#if hearts}
-{#each hearts as heart , i }
-<li>
-
-  <Heart_1 count={heart} count_id={i}></Heart_1>
-
-</li>
-{/each}
-{/if}
-</ul>
-
-
-<style>
-    
-	ul {
-        display: -webkit-box;
-        display: -moz-box;
-        display: -ms-flexbox;
-        display: -webkit-flex;
-        display: flex;  
-        -webkit-flex-flow: row wrap;
-        flex-flow: row wrap;
-        gap:-0.5em;
-          align-items: start;
-          justify-content:center;
-		  width: 100%;
-	}
-li {
-  display: inline-block;
-}
-
-</style>
- -->
-
 <script>
   import Heart_1 from './heart.svelte';
    
@@ -143,10 +85,7 @@ li {
 </ul>
 <style>
 
-    body{
-      width:100%;
-      height: 100%;
-    }
+
 ul {
     
         display: -webkit-box;
@@ -157,8 +96,9 @@ ul {
         -webkit-flex-flow: row wrap;
         flex-flow: row wrap;
         gap:1em;
-          align-items: center;
-          justify-content:center;
+          align-items: flex-start;
+          justify-content:flex-start;
+          padding: 30px;
 
 	}
 li {
@@ -168,5 +108,4 @@ li {
   max-height: 10vh;
   padding:35px ;
 }
-
 </style>
