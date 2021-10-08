@@ -4,13 +4,49 @@
 	import { onMount } from 'svelte';
 	export let count = 0;
 export let count_id = 0;
+export let label;
+function decodeBl(percent){
+    if(percent >= 70  && percent <= 85){
+      return 5
+    }
+    
+    if(percent >= 40  && percent <= 69){
+      return 4
+    }
+  
 
+    if(percent >= 20  && percent <= 39){
+      return 2
+    }
 
-  let pumpLevels = [0, 0, 3, 0, 0, 0 , 0];
-	let tankLevels = [0, 10, 3, 30, 40, 60, 60];
+    if(percent >= 5  && percent <= 19){
+      return 1
+    }
+
+    if(percent >= 86  && percent <= 95){
+      return 6
+    }
+    
+    if(percent >= 95){
+      return 7
+    }
+    if(percent <= 4){
+      return 0
+    }
+  }
+
+  let pumpLevels = [0, 0, 0,0, 0, 0, 0 , 0];
+	let tankLevels = [-5,10, 20, 30, 40 , 50, 70,100];
+
+  // 1 0-15 
+  // 2 
+  // 3
+  // 4
 	let isAnimating = false;
 
 export function pumpHeart(counter) {
+  counter = decodeBl(counter)
+  console.log(counter)
     if (isAnimating) {
         return;
     }
@@ -18,7 +54,7 @@ export function pumpHeart(counter) {
     isAnimating = true;
     //forward
     gsap.to('#heart'+count_id, {
-        translateZ: pumpLevels[3],
+        translateZ: pumpLevels[counter],
         duration: 0.5
     });
 
@@ -29,7 +65,7 @@ export function pumpHeart(counter) {
         duration: 0.5
     })
     gsap.to('#tank'+count_id, {
-        height: counter === 3 ? 0 : tankLevels[counter],
+        height: tankLevels[counter],
         duration: 0.5
     })
 
@@ -63,17 +99,20 @@ pumpHeart(count)
 
 <div class="container">
   <div class="heart-wrap">
-				{count}
     <div id="heart{count_id}" class="heart" >
-      <div id="tank{count_id}" class="tank"></div>
+      
+      <div class="percent">{label}<br>{count}%</div>
+      <div id="tank{count_id}" class="tank">
+
+        </div>
       <svg  id="curve{count_id}"class="curve" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
         <defs>
           <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
         </defs>
         <g>
-          <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(103, 130, 191, 0.5)" />
-          <use xlink:href="#gentle-wave" x="48" y="1" fill="rgba(103, 130, 191, 0.3)" />
-          <use xlink:href="#gentle-wave" x="48" y="2" fill="rgba(103, 130, 191, 1)" />
+          <use xlink:href="#gentle-wave" x="48" y="0" fill="#dc143c" />
+          <use xlink:href="#gentle-wave" x="48" y="1" fill="#bb0a1e" />
+          <use xlink:href="#gentle-wave" x="48" y="2" fill="#800000	" />
         </g>
       </svg>
     </div>
@@ -88,16 +127,13 @@ pumpHeart(count)
 
 
 
-
-
-
 <style>/* 
   Wave svg credits - https://codepen.io/goodkatz/pen/LYPGxQz
   */
   :root {
-    --dim-x: 120px;
-    --dim-y: 105px;
-    --cruve-height: 10px;
+    --dim-x: 100px;
+    --dim-y: 85px;
+    --cruve-height: 13px;
   }
   
   * {
@@ -107,12 +143,8 @@ pumpHeart(count)
   }
   
   .container {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    background: white;
+    max-height: 10vh;
+    max-width: 10vw;
   }
   
   #myPath path {
@@ -120,9 +152,8 @@ pumpHeart(count)
   }
   
   .heart-wrap {
-    cursor: pointer;
-    perspective: 200px;
-    filter: drop-shadow(0px 10px 10px rgba(174, 196, 238, 0.5));
+    perspective: 50px;
+    filter: drop-shadow(0px 10px 10px rgba(149, 179, 235, 0.63));
   }
   
   .heart {
@@ -139,7 +170,7 @@ pumpHeart(count)
     bottom: 0;
     height: 0;
     width: var(--dim-x);
-    background-color: #6782bf;
+    background-color: #800000	;
     z-index: 5;
   }
   
@@ -170,5 +201,15 @@ pumpHeart(count)
       transform: translateX(85px);
     }
   }
-
+.percent{
+  position: absolute;
+  color:white;
+  font-weight: 700;
+  top: 50%;
+  left: 55%;
+  /* bring your own prefixes */
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+    text-shadow: -1px 0 maroon, 0 1px maroon, 1px 0 maroon, 0 -1px maroon;
+}
 </style>
