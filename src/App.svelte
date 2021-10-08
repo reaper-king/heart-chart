@@ -4,7 +4,6 @@ import { onMount } from  'svelte';
 import Heart_1 from './heart.svelte';
  
 let hearts 
-//  = [0,1,2,3,4,5,6,7]
 
 
 
@@ -19,20 +18,6 @@ async function fetchMoviesJSON() {
               hearts = sheetData[0]
             });
 
-
-/*
-
-0 - 0
-1 - 10
-2 - 20 -30 
-3 - 40
-4 -50
-5 = 50 60 
-6 70 80
-7 90 
-8 100
-
-*/
 
 </script>
 <ul>
@@ -157,8 +142,12 @@ li {
 {/await}
 </ul>
 <style>
-    
-	ul {
+
+    body{
+      width:100%;
+      height: 100%;
+    }
+ul {
     
         display: -webkit-box;
         display: -moz-box;
@@ -167,7 +156,7 @@ li {
         display: flex;  
         -webkit-flex-flow: row wrap;
         flex-flow: row wrap;
-        gap:5em;
+        gap:1em;
           align-items: center;
           justify-content:center;
 
@@ -177,6 +166,7 @@ li {
   min-width: 5vw;
   max-width: 5vw;
   max-height: 10vh;
+  padding:35px ;
 }
 
 </style>
