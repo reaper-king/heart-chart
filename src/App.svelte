@@ -92,7 +92,7 @@ li {
 	}
 </script>
 
-<!-- <ul> -->
+<ul class="ulist">
 
 {#await promise}
 	<strong>...Loading</strong>
@@ -155,9 +155,9 @@ li {
 {:catch error}
 	<p style="color: red">{error.message}</p>
 {/await}
-<!-- </ul> -->
+</ul>
 <style>
-ul {
+.ulist {
     
         display: -webkit-box;
         display: -moz-box;
@@ -172,7 +172,7 @@ ul {
           padding: 30px;
 
 	}
-li {
+  .ulist li {
   display: inline-block;
   min-width: 5vw;
   max-width: 5vw;
