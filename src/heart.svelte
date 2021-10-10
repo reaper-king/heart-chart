@@ -97,7 +97,7 @@ pumpHeart(count)
 </script>
 
 
-<div class="container">
+<div class="containerH">
   <div class="heart-wrap">
     <div id="heart{count_id}" class="heart" >
       
@@ -142,7 +142,7 @@ pumpHeart(count)
     box-sizing: border-box;
   }
   
-  .container {
+  .containerH {
     max-height: 10vh;
     max-width: 10vw;
   }
